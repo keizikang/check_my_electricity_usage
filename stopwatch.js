@@ -1,7 +1,7 @@
 let timerId;
 let time = 0;
 const stopwatch = document.getElementById("stopwatch");
-let  hour, min, sec;
+let min, sec, msec;
 
 
 function printTime() {
@@ -13,7 +13,7 @@ function printTime() {
 function startClock() {
     printTime();
     stopClock();
-    timerId = setTimeout(startClock, 1000);
+    timerId = setTimeout(startClock, 1);
 }
 
 //시계 중지
@@ -26,15 +26,14 @@ function stopClock() {
 // 시계 초기화
 function resetClock() {
     stopClock()
-    stopwatch.innerText = "00:00:00";
+    stopwatch.innerText = "00:00:00.000";
     time = 0;
 }
 
 // 시간(int)을 시, 분, 초 문자열로 변환
 function getTimeFormatString() {
-    hour = parseInt(String(time / (60 * 60)));
     min = parseInt(String((time - (hour * 60 * 60)) / 60));
     sec = time % 60;
-
+    return time
     return String(hour).padStart(2, '0') + ":" + String(min).padStart(2, '0') + ":" + String(sec).padStart(2, '0');
 }
