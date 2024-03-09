@@ -1,0 +1,28 @@
+body {
+  background-color: orange;
+}
+#wrapper { 
+  /* border: 2px solid black; */
+  width: 400px;
+  color: white;
+  text-align: center;
+  margin: 20px auto;
+}
+p {
+  font-size: 32px;
+}
+button {
+  color: white;
+  background-color: orange;
+  border: 2px solid white;
+  font-size: 18px;
+  padding: 10px 20px;
+  width: 100px;
+  margin: 10px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: white;
+  color: orange;
+  transition: 0.5s ease;
+}
