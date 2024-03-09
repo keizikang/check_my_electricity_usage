@@ -1,60 +1,40 @@
-window.onload = function () {
-  
-  var seconds = 00; 
-  var tens = 00; 
-  var appendTens = document.getElementById("tens")
-  var appendSeconds = document.getElementById("seconds")
-  var buttonStart = document.getElementById('button-start');
-  var buttonStop = document.getElementById('button-stop');
-  var buttonReset = document.getElementById('button-reset');
-  var Interval ;
+let timerId;
+let time = 0;
+const stopwatch = document.getElementById("stopwatch");
+let  hour, min, sec;
 
-  buttonStart.onclick = function() {
-    
-    clearInterval(Interval);
-     Interval = setInterval(startTimer, 10);
-  }
-  
-    buttonStop.onclick = function() {
-       clearInterval(Interval);
-  }
-  
 
-  buttonReset.onclick = function() {
-     clearInterval(Interval);
-    tens = "00";
-  	seconds = "00";
-    appendTens.innerHTML = tens;
-  	appendSeconds.innerHTML = seconds;
-  }
-  
-   
-  
-  function startTimer () {
-    tens++; 
-    
-    if(tens <= 9){
-      appendTens.innerHTML = "0" + tens;
-    }
-    
-    if (tens > 9){
-      appendTens.innerHTML = tens;
-      
-    } 
-    
-    if (tens > 99) {
-      console.log("seconds");
-      seconds++;
-      appendSeconds.innerHTML = "0" + seconds;
-      tens = 0;
-      appendTens.innerHTML = "0" + 0;
-    }
-    
-    if (seconds > 9){
-      appendSeconds.innerHTML = seconds;
-    }
-  
-  }
-  
+function printTime() {
+    time++;
+    stopwatch.innerText = getTimeFormatString();
+}
 
+//시계 시작 - 재귀호출로 반복실행
+function startClock() {
+    printTime();
+    stopClock();
+    timerId = setTimeout(startClock, 1000);
+}
+
+//시계 중지
+function stopClock() {
+    if (timerId != null) {
+        clearTimeout(timerId);
+    }
+}
+
+// 시계 초기화
+function resetClock() {
+    stopClock()
+    stopwatch.innerText = "00:00:00";
+    time = 0;
+}
+
+// 시간(int)을 시, 분, 초 문자열로 변환
+function getTimeFormatString() {
+    hour = parseInt(String(time / (60 * 60)));
+    min = parseInt(String((time - (hour * 60 * 60)) / 60));
+    sec = time % 60;
+
+    return String(hour).padStart(2, '0') + ":" + String(min).padStart(2, '0') + ":" + String(sec).padStart(2, '0');
 }
