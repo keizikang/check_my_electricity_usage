@@ -4,6 +4,8 @@ let timerId;
 let time = 0;
 const stopwatch = document.getElementById("stopwatch");
 const watt = document.getElementById("watt")
+const kWh = document.getElementById("kWh")
+const kWh_mon = document.getElementById("kWh_mon")
 let hour, min, sec, dsec;
 
 function printTime() {
@@ -28,7 +30,9 @@ function stopClock1() {
 function stopClock() {
   stopClock1()
   watt.innerText = "현재 사용 전력: " + parseInt(String(72000/time)) + " Watt"
-
+  kWh.innerText = "→ 한 시간 예상 전력량(비용): " + parseFloat(String(72/time)).toFixed(2) + " kWh (" + parseInt(String(72*200/time)) + "원)"
+  kWh_mon.innerText = "→ 한 달 예상 전력량(비용): " + parseInt(String(72/time*720)) + " kWh (" + parseInt(String(72*200/time*720)) + "원)"
+  
 }
 
 
